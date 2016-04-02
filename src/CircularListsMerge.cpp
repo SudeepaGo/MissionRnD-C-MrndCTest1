@@ -44,26 +44,26 @@ int merge_circularlists(struct node **head1, struct node **head2){
 	
 	while (1)
 	{
-		if (*head1 == NULL)  //If all the nodes of head1 are traversed then merge head2
+		if (*head1 == NULL)  
 		{
 			*head = *head2;
 			break;
 		}
-		else if (head2 == NULL)  //If all the nodes of head2 are traversed then merge head1
+		else if (head2 == NULL)  
 		{
 			*head = *head1;
 			break;
 		}
-		if ((*head1)->data <= (*head2)->data) //If the node of head1 is of lesser value,then insert it first in new list
+		if ((*head1)->data <= (*head2)->data)
 		{
 			insertNode(head, head1);
 
 		}
 		else
 		{
-			insertNode(head, head2); //If the node of head2 is of lesser value,then insert it first in new list
+			insertNode(head, head2); 
 		}
-		head = &((*head)->next); //Advance the new list
+		head = &((*head)->next); 
 	}
 	int len = findLength(head);
 	return len;
