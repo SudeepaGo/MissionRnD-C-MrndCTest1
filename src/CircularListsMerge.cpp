@@ -27,6 +27,8 @@ Difficulty : Medium
 */
 #include <stdlib.h>
 #include <stdio.h>
+void insertNode(struct node **, struct node **);
+
 
 struct node{
 	int data;
@@ -39,8 +41,7 @@ int merge_circularlists(struct node **head1, struct node **head2){
 		return -1;
 	struct node *result = NULL;
 	struct node **head = &result;
-}
-	/*
+	
 	while (1)
 	{
 		if (*head1 == NULL)  //If all the nodes of head1 are traversed then merge head2
@@ -53,7 +54,7 @@ int merge_circularlists(struct node **head1, struct node **head2){
 			*head = *head1;
 			break;
 		}
-		if (*head1->data <= head2->data) //If the node of head1 is of lesser value,then insert it first in new list
+		if ((*head1)->data <= (*head2)->data) //If the node of head1 is of lesser value,then insert it first in new list
 		{
 			insertNode(head, head1);
 
@@ -64,7 +65,7 @@ int merge_circularlists(struct node **head1, struct node **head2){
 		}
 		head = &((*head)->next); //Advance the new list
 	}
-	return -1;
+	
 }
 
 void insertNode(struct node **destNode, struct node **srcNode)
@@ -72,4 +73,4 @@ void insertNode(struct node **destNode, struct node **srcNode)
 		struct node *temp = *srcNode;
 		*srcNode = temp->next;
 		*destNode = temp;
-}*/
+}
