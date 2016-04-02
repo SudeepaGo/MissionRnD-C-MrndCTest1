@@ -23,6 +23,10 @@ Difficulty : Hard
 #include <stdio.h>
 #include <math.h>
 
+int days(int, int, int, int, int, int);
+int months(int, int);
+int mon[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
 struct node{
 	int data;
 	struct node *next;
@@ -30,5 +34,73 @@ struct node{
 
 
 int between_days(struct node *date1head, struct node *date2head){
+	if (date1head==NULL || date2head==NULL)
 	return -1;
+	int i;
+	int d1=0, d2=0, m1=0, m2=0, y1=0, y2=0;
+	struct node *temp1 = date1head;
+	struct node *temp2 = date2head;
+	
+	for (i = 0; i < 2; i++)
+	{
+		d1 = d1 * 10 + temp1->data;
+		temp1 = temp1->next;
+		d2 = d2 * 10 + temp2->data;
+		temp2 = temp2->next;
+	}
+	for (i = 2; i < 4; i++)
+	{
+		m1 = m1 * 10 + temp1->data;
+		temp1 = temp1->next;
+		m2 = m2 * 10 + temp2->data;
+		temp2 = temp2->next;
+	}
+	for (i = 4; i < 8; i++)
+	{
+		y1 = y1 * 10 + temp1->data;
+		temp1 = temp1->next;
+		y2 = y2 * 10 + temp2->data;
+		temp2 = temp2->next;
+	}
+	if (y1 == y2 && m1 == m2 && d1 == d2) return 0;
+	if (y1 == y2 && m1 == m2 && (d2 - d1) == 1) return 0;
+	int diff = days(y1, y2, m1, m2, d1, d2);
+	return (diff-1);
+}
+
+int days(int y1, int y2, int m1, int m2, int d1, int d2)
+{
+	int count = 0, i;
+	for (i = y1; i < y2; i++)
+	{
+		if (i % 4 == 0)
+			count += 366;
+		else
+			count += 365;
+	}
+	count -= months(m1, y1);
+	count -= d1;
+	count += months(m2, y2);
+	count += d2;
+	if (count<0)
+		count = count*-1;
+	return count;
+}
+
+int months(int m, int y)
+{
+	int t = 0, c;
+	for (c = 0; c<m - 1; c++)
+	{
+		if (c == 1)
+		{
+			if (y % 4 == 0)
+				t += 29;
+			else
+				t += 28;
+		}
+		else
+			t += mon[c];
+	}
+	return(t);
 }
