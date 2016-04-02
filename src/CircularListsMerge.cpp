@@ -28,7 +28,7 @@ Difficulty : Medium
 #include <stdlib.h>
 #include <stdio.h>
 void insertNode(struct node **, struct node **);
-
+int findLength(struct node **);
 
 struct node{
 	int data;
@@ -65,7 +65,8 @@ int merge_circularlists(struct node **head1, struct node **head2){
 		}
 		head = &((*head)->next); //Advance the new list
 	}
-	
+	int len = findLength(head);
+	return len;
 }
 
 void insertNode(struct node **destNode, struct node **srcNode)
@@ -73,4 +74,16 @@ void insertNode(struct node **destNode, struct node **srcNode)
 		struct node *temp = *srcNode;
 		*srcNode = temp->next;
 		*destNode = temp;
+}
+
+int findLength(struct node **head)
+{
+	int count = 0;
+	struct node *temp = *head;
+	while (temp != NULL)
+	{
+		count++;
+		temp = temp->next;
+	}
+	return count;
 }
