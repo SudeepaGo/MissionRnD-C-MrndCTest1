@@ -102,5 +102,5 @@ int months(int m, int y)
 		else
 			t += mon[c];
 	}
-	return(t);
+	return t;
 }
